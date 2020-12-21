@@ -38,6 +38,4 @@ export class VisitorController {
   delete(@Param('id') id: number) {
     return this.visitorService.delete(id);
   }
-
-  //  TODO: API
 }
