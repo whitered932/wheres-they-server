@@ -14,8 +14,8 @@ export class VisitorTypeService {
     return await this.visitorTypeRepository.find({});
   }
 
-  async getById(id: number) {
-    return await this.visitorTypeRepository.findOne({ id });
+  async getById(id: number, options = null) {
+    return await this.visitorTypeRepository.findOne({ id }, options);
   }
 
   async create(data) {

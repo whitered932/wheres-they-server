@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { VisitorEntity } from '../../entities/visitor.entity';
 import { GroupService } from '../group/group.service';
 import { VisitorTypeService } from '../visitor-type/visitor-type.service';
+import { type } from 'os';
 
 @Injectable()
 export class VisitorService {
@@ -20,6 +21,13 @@ export class VisitorService {
 
   async getById(id: number) {
     return await this.visitorRepository.findOne(id);
+  }
+
+  async getByType(typeId: number) {
+    const type = await this.visitorTypeService.getById(typeId, {
+      relations: ['visitors'],
+    });
+    return type.visitors;
   }
 
   async create(data) {

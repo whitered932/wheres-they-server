@@ -17,9 +17,9 @@ export class VisitorTypeEntity {
   @Column({ length: 30 })
   title: string;
 
-  @ManyToMany(() => VisitorEntity)
+  @ManyToMany(() => VisitorEntity, (visitor) => visitor.types)
   @JoinTable({ name: 'visitor_types_types' })
-  types: VisitorEntity[];
+  visitors: VisitorEntity[];
 
   @CreateDateColumn()
   created_at: Date;

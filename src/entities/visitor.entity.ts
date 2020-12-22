@@ -31,7 +31,7 @@ export class VisitorEntity {
   @ManyToOne(() => GroupEntity, (group) => group.visitors)
   group: GroupEntity;
 
-  @ManyToMany(() => VisitorTypeEntity)
+  @ManyToMany(() => VisitorTypeEntity, (type) => type.visitors)
   @JoinTable({ name: 'visitor_types_types' })
   types: VisitorTypeEntity[];
 

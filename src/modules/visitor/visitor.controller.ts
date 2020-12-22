@@ -24,6 +24,11 @@ export class VisitorController {
     return this.visitorService.getById(id);
   }
 
+  @Get(':id/type')
+  getByType(@Param('id') id: number) {
+    return this.visitorService.getByType(id);
+  }
+
   @Post('create')
   create(@Body() visitor: VisitorDto) {
     return this.visitorService.create(visitor);
