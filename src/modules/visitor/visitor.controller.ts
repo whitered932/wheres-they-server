@@ -1,11 +1,11 @@
 import {
-  Body,
   Controller,
-  Delete,
-  Get,
+  Body,
   Param,
+  Get,
   Post,
   Put,
+  Delete,
 } from '@nestjs/common';
 import { VisitorService } from './visitor.service';
 import { VisitorDto } from './visitor.dto';
