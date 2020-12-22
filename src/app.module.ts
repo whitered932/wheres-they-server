@@ -5,9 +5,10 @@ import { VisitorModule } from './modules/visitor/visitor.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VisitModule } from './modules/visit/visit.module';
 import { GroupModule } from './modules/group/group.module';
+import { VisitorTypeModule } from './modules/visitor-type/visitor-type.module';
 
 @Module({
-  imports: [VisitorModule, TypeOrmModule.forRoot(), VisitModule, GroupModule],
+  imports: [VisitorModule, TypeOrmModule.forRoot(), VisitModule, GroupModule, VisitorTypeModule],
   controllers: [AppController],
   providers: [AppService],
 })

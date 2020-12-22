@@ -48,4 +48,14 @@ export class VisitorController {
   removeGroup(@Param('id') id) {
     return this.visitorService.removeGroup(id);
   }
+
+  @Put(':id/addType')
+  addType(@Param('id') id, @Body('typeId') typeId) {
+    return this.visitorService.addType(id, typeId);
+  }
+
+  @Delete(':id/deleteType')
+  deleteType(@Param('id') id, @Body('typeId') typeId) {
+    return this.visitorService.removeType(id, typeId);
+  }
 }

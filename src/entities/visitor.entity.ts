@@ -2,14 +2,17 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  ManyToMany,
   ManyToOne,
   OneToMany,
+  JoinTable,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
 import { VisitEntity } from './visit.entity';
 import { GroupEntity } from './group.entity';
+import { VisitorTypeEntity } from './visitor-type.entity';
 
 @Entity('visitors')
 export class VisitorEntity {
@@ -22,13 +25,15 @@ export class VisitorEntity {
   @Column()
   birthday: Date;
 
-  // TODO: Relations
-
   @OneToMany(() => VisitEntity, (visit) => visit.visitor)
   visits: VisitEntity[];
 
   @ManyToOne(() => GroupEntity, (group) => group.visitors)
   group: GroupEntity;
+
+  @ManyToMany(() => VisitorTypeEntity)
+  @JoinTable({ name: 'visitor_types_types' })
+  types: VisitorTypeEntity[];
 
   @CreateDateColumn()
   created_at: Date;
