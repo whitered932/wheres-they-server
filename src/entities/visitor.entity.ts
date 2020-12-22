@@ -3,11 +3,15 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { VisitEntity } from './visit.entity';
+import { GroupEntity } from './group.entity';
 
 @Entity('visitors')
 export class VisitorEntity {
@@ -24,6 +28,9 @@ export class VisitorEntity {
 
   @OneToMany(() => VisitEntity, (visit) => visit.visitor)
   visits: VisitEntity[];
+
+  @ManyToOne(() => GroupEntity, (group) => group.visitors)
+  group: GroupEntity;
 
   @CreateDateColumn()
   created_at: Date;
