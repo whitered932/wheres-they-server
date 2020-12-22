@@ -38,4 +38,14 @@ export class VisitorController {
   delete(@Param('id') id: number) {
     return this.visitorService.delete(id);
   }
+
+  @Put(':id/group')
+  setGroup(@Param('id') id, @Body('title') title) {
+    return this.visitorService.setGroup(id, title);
+  }
+
+  @Delete(':id/group/remove')
+  removeGroup(@Param('id') id) {
+    return this.visitorService.removeGroup(id);
+  }
 }

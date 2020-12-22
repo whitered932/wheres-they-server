@@ -32,4 +32,12 @@ export class GroupService {
     await this.groupEntityRepository.delete({ title: title });
     return { deleted: true };
   }
+
+  // После создания Client части, стоит подумать над реализацией
+
+  // async addVisitor(title, visitorId) {
+  //   const group = await this.groupEntityRepository.findOne({ title: title });
+  //   group.visitors = [...group.visitors, visitorId];
+  //   return this.groupEntityRepository.save(group);
+  // }
 }
