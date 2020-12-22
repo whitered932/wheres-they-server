@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Visitor } from '../../entities/visitor.entity';
+import { VisitorEntity } from '../../entities/visitor.entity';
 
 @Injectable()
 export class VisitorService {
   constructor(
-    @InjectRepository(Visitor)
-    private visitorRepository: Repository<Visitor>,
+    @InjectRepository(VisitorEntity)
+    private visitorRepository: Repository<VisitorEntity>,
   ) {}
 
   async getAll() {

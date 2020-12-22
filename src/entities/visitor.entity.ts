@@ -7,10 +7,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Visit } from './visit.entity';
+import { VisitEntity } from './visit.entity';
 
 @Entity('visitors')
-export class Visitor {
+export class VisitorEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,8 +22,8 @@ export class Visitor {
 
   // TODO: Relations
 
-  @OneToMany(() => Visit, (visit) => visit.visitor)
-  visits: Visit[];
+  @OneToMany(() => VisitEntity, (visit) => visit.visitor)
+  visits: VisitEntity[];
 
   @CreateDateColumn()
   created_at: Date;

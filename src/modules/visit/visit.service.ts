@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Visit } from '../../entities/visit.entity';
+import { VisitEntity } from '../../entities/visit.entity';
 import { Between, Repository } from 'typeorm';
 
 @Injectable()
 export class VisitService {
   constructor(
-    @InjectRepository(Visit)
-    private visitRepository: Repository<Visit>,
+    @InjectRepository(VisitEntity)
+    private visitRepository: Repository<VisitEntity>,
   ) {}
 
   async find(
