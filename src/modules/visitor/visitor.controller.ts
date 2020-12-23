@@ -5,12 +5,12 @@ import {
   Get,
   Post,
   Put,
-  Delete,
-} from '@nestjs/common';
+  Delete, Patch
+} from "@nestjs/common";
 import { VisitorService } from './visitor.service';
 import { VisitorDto } from './visitor.dto';
 
-@Controller('visitor')
+@Controller('visitors')
 export class VisitorController {
   constructor(private visitorService: VisitorService) {}
 
@@ -29,6 +29,11 @@ export class VisitorController {
     return this.visitorService.getByType(id);
   }
 
+  @Get(':title/group')
+  getByGroup(@Param('id') id: number) {
+    return this.visitorService.getByGroup(id);
+  }
+
   @Post('create')
   create(@Body() visitor: VisitorDto) {
     return this.visitorService.create(visitor);
@@ -44,7 +49,12 @@ export class VisitorController {
     return this.visitorService.delete(id);
   }
 
-  @Put(':id/group')
+  @Patch(':id/restore')
+  restore(@Param('id') id: number) {
+    return this.visitorService.restore(id);
+  }
+
+  @Put(':id/group/set')
   setGroup(@Param('id') id, @Body('title') title) {
     return this.visitorService.setGroup(id, title);
   }

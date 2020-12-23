@@ -10,7 +10,7 @@ import {
 import { VisitorTypeService } from './visitor-type.service';
 import { VisitorTypeDto } from './visitor-type.dto';
 
-@Controller('type')
+@Controller('types')
 export class VisitorTypeController {
   constructor(private visitorTypeService: VisitorTypeService) {}
 

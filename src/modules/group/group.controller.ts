@@ -10,7 +10,7 @@ import {
 import { GroupService } from './group.service';
 import { GroupDto } from './group.dto';
 
-@Controller('group')
+@Controller('groups')
 export class GroupController {
   constructor(private groupService: GroupService) {}
 
@@ -20,8 +20,8 @@ export class GroupController {
   }
 
   @Get(':title')
-  getByTitle(@Param('title') title: string) {
-    return this.groupService.getByTitle(title);
+  getById(@Param('id') id: number) {
+    return this.groupService.getById(id);
   }
 
   @Post('create')

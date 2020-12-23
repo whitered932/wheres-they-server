@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { VisitorEntity } from '../../entities/visitor.entity';
 import { GroupService } from '../group/group.service';
 import { VisitorTypeService } from '../visitor-type/visitor-type.service';
-import { type } from 'os';
 
 @Injectable()
 export class VisitorService {
@@ -30,6 +29,14 @@ export class VisitorService {
     return type.visitors;
   }
 
+  async getByGroup(id: number) {
+    const group = await this.groupService.getById(id, {
+      relations: 'visitors',
+    });
+    console.log(group.visitors);
+    return group.visitors;
+  }
+
   async create(data) {
     data.types = [];
     const visitor = this.visitorRepository.create(data);
@@ -46,8 +53,13 @@ export class VisitorService {
     return { deleted: true };
   }
 
-  async setGroup(id: number, title: string) {
-    const group = await this.groupService.getByTitle(title);
+  async restore(id: number) {
+    await this.visitorRepository.restore(id);
+    return { restored: true };
+  }
+
+  async setGroup(id: number, groupId: number) {
+    const group = await this.groupService.getById(groupId);
     await this.visitorRepository.update({ id }, { group: group });
     return { groupChanged: true };
   }

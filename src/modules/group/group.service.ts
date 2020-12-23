@@ -14,8 +14,8 @@ export class GroupService {
     return this.groupEntityRepository.find({});
   }
 
-  async getByTitle(title: string) {
-    return this.groupEntityRepository.findOne({ title });
+  async getById(id: number, options = null) {
+    return await this.groupEntityRepository.findOne({ id }, options);
   }
 
   async create(data) {
