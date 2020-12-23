@@ -42,13 +42,6 @@ export class VisitorService {
     return { restored: true };
   }
 
-  async setGroup(id: number, groupId: number) {
-    // Если ID группы не передано, то у пользователя её не будет
-    const group = await this.groupService.getById(groupId);
-    await this.visitorRepository.update({ id }, { group: group });
-    return { groupChanged: true };
-  }
-
   async addType(id: number, typeId: number) {
     const type = await this.visitorTypeService.getById(typeId);
     const visitor = await this.visitorRepository.findOne(

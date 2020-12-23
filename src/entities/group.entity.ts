@@ -13,7 +13,7 @@ export class GroupEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 20, unique: true })
+  @Column({ length: 100 })
   title: string;
 
   @Column({ length: 400, nullable: true })

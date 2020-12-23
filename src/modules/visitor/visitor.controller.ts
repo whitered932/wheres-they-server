@@ -47,19 +47,4 @@ export class VisitorController {
     return this.visitorService.restore(id);
   }
 
-  @Patch(':id/group')
-  setGroup(@Param('id') id, @Body('title') title) {
-    return this.visitorService.setGroup(id, title);
-  }
-
-  // TODO: Эти методы перенести в своё место обитания
-  @Patch(':id/type')
-  addType(@Param('id') id, @Body('typeId') typeId) {
-    return this.visitorService.addType(id, typeId);
-  }
-
-  @Delete(':id/deleteType')
-  deleteType(@Param('id') id, @Body('typeId') typeId) {
-    return this.visitorService.removeType(id, typeId);
-  }
 }
