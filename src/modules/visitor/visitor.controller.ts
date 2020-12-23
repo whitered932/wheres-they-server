@@ -5,8 +5,9 @@ import {
   Get,
   Post,
   Put,
-  Delete, Patch
-} from "@nestjs/common";
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { VisitorService } from './visitor.service';
 import { VisitorDto } from './visitor.dto';
 
@@ -24,27 +25,30 @@ export class VisitorController {
     return this.visitorService.getById(id);
   }
 
+  // TODO: Бесполезные методы. УДАЛИТЬ!
   @Get(':id/type')
   getByType(@Param('id') id: number) {
     return this.visitorService.getByType(id);
   }
 
-  @Get(':title/group')
+  // TODO: Бесполезные методы. УДАЛИТЬ!
+  @Get(':id/group')
   getByGroup(@Param('id') id: number) {
     return this.visitorService.getByGroup(id);
   }
 
-  @Post('create')
+  @Post()
   create(@Body() visitor: VisitorDto) {
     return this.visitorService.create(visitor);
   }
 
-  @Put(':id/update')
+  // TODO: В случае отстуствия изменений = код 204
+  @Put(':id')
   update(@Param('id') id: number, @Body() visitor: VisitorDto) {
     return this.visitorService.update(id, visitor);
   }
 
-  @Delete(':id/delete')
+  @Delete(':id')
   delete(@Param('id') id: number) {
     return this.visitorService.delete(id);
   }
@@ -54,17 +58,13 @@ export class VisitorController {
     return this.visitorService.restore(id);
   }
 
-  @Put(':id/group/set')
+  @Patch(':id/group')
   setGroup(@Param('id') id, @Body('title') title) {
     return this.visitorService.setGroup(id, title);
   }
 
-  @Delete(':id/group/remove')
-  removeGroup(@Param('id') id) {
-    return this.visitorService.removeGroup(id);
-  }
-
-  @Put(':id/addType')
+  // TODO: Эти методы перенести в своё место обитания
+  @Patch(':id/type')
   addType(@Param('id') id, @Body('typeId') typeId) {
     return this.visitorService.addType(id, typeId);
   }

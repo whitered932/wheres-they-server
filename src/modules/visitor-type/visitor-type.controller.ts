@@ -24,17 +24,17 @@ export class VisitorTypeController {
     return this.visitorTypeService.getById(id);
   }
 
-  @Post('create')
+  @Post()
   create(@Body() type: VisitorTypeDto) {
     return this.visitorTypeService.create(type);
   }
 
-  @Put(':id/update')
+  @Put(':id')
   update(@Param('id') id, @Body() type: VisitorTypeDto) {
     return this.visitorTypeService.update(id, type);
   }
 
-  @Delete(':id/delete')
+  @Delete(':id')
   delete(@Param('id') id: number) {
     return this.visitorTypeService.delete(id);
   }

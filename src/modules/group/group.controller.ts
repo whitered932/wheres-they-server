@@ -19,23 +19,23 @@ export class GroupController {
     return this.groupService.getAll();
   }
 
-  @Get(':title')
+  @Get(':id')
   getById(@Param('id') id: number) {
     return this.groupService.getById(id);
   }
 
-  @Post('create')
+  @Post()
   create(@Body() group: GroupDto) {
     return this.groupService.create(group);
   }
 
-  @Put(':title/update')
-  update(@Param('title') title, @Body() data: GroupDto) {
-    return this.groupService.update(title, data);
+  @Put(':id')
+  update(@Param('id') id, @Body() data: GroupDto) {
+    return this.groupService.update(id, data);
   }
 
-  @Delete(':title/delete')
-  delete(@Param('title') title) {
-    return this.groupService.delete(title);
+  @Delete(':id')
+  delete(@Param('id') id) {
+    return this.groupService.delete(id);
   }
 }

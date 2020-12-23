@@ -15,7 +15,7 @@ export class VisitController {
     );
   }
 
-  @Post('create')
+  @Post()
   create(@Body() visit: createVisitDto) {
     if (!visit.date) {
       visit.date = new Date().toISOString();
@@ -24,7 +24,7 @@ export class VisitController {
     return this.visitService.create(visit);
   }
 
-  @Delete(':id/delete')
+  @Delete(':id')
   delete(@Param('id') id: number) {
     return this.visitService.delete(id);
   }

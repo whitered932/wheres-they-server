@@ -31,9 +31,8 @@ export class VisitorService {
 
   async getByGroup(id: number) {
     const group = await this.groupService.getById(id, {
-      relations: 'visitors',
+      relations: ['visitors'],
     });
-    console.log(group.visitors);
     return group.visitors;
   }
 
@@ -59,14 +58,10 @@ export class VisitorService {
   }
 
   async setGroup(id: number, groupId: number) {
+    // Если ID группы не передано, то у пользователя её не будет
     const group = await this.groupService.getById(groupId);
     await this.visitorRepository.update({ id }, { group: group });
     return { groupChanged: true };
-  }
-
-  async removeGroup(id: number) {
-    await this.visitorRepository.update({ id }, { group: null });
-    return { removed: true };
   }
 
   async addType(id: number, typeId: number) {
