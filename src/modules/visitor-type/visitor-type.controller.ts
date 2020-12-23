@@ -4,11 +4,12 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
 import { VisitorTypeService } from './visitor-type.service';
-import { VisitorTypeDto } from './visitor-type.dto';
+import { UpdateVisitorTypeDto, VisitorTypeDto } from './visitor-type.dto';
 
 @Controller('types')
 export class VisitorTypeController {
@@ -27,6 +28,15 @@ export class VisitorTypeController {
   @Post()
   create(@Body() type: VisitorTypeDto) {
     return this.visitorTypeService.create(type);
+  }
+
+  @Patch(':id/visitors')
+  addOrRemoveVisitor(@Param('id') id, @Body() data: UpdateVisitorTypeDto) {
+    return this.visitorTypeService.addOrRemoveVisitor(
+      id,
+      data.visitor,
+      data.remove,
+    );
   }
 
   @Put(':id')

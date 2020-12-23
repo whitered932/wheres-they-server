@@ -17,7 +17,9 @@ export class VisitorTypeEntity {
   @Column({ length: 30 })
   title: string;
 
-  @ManyToMany(() => VisitorEntity, (visitor) => visitor.types)
+  @ManyToMany(() => VisitorEntity, (visitor) => visitor.types, {
+    nullable: true,
+  })
   @JoinTable({ name: 'visitor_types_types' })
   visitors: VisitorEntity[];
 

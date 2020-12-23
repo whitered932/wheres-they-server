@@ -22,22 +22,7 @@ export class VisitorService {
     return await this.visitorRepository.findOne(id);
   }
 
-  async getByType(typeId: number) {
-    const type = await this.visitorTypeService.getById(typeId, {
-      relations: ['visitors'],
-    });
-    return type.visitors;
-  }
-
-  async getByGroup(id: number) {
-    const group = await this.groupService.getById(id, {
-      relations: ['visitors'],
-    });
-    return group.visitors;
-  }
-
   async create(data) {
-    data.types = [];
     const visitor = this.visitorRepository.create(data);
     return await this.visitorRepository.save(visitor);
   }

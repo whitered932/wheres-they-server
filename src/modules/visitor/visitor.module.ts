@@ -14,5 +14,6 @@ import { VisitorTypeModule } from '../visitor-type/visitor-type.module';
   ],
   controllers: [VisitorController],
   providers: [VisitorService],
+  exports: [VisitorService],
 })
 export class VisitorModule {}

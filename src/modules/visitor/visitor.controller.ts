@@ -25,17 +25,6 @@ export class VisitorController {
     return this.visitorService.getById(id);
   }
 
-  // TODO: Бесполезные методы. УДАЛИТЬ!
-  @Get(':id/type')
-  getByType(@Param('id') id: number) {
-    return this.visitorService.getByType(id);
-  }
-
-  // TODO: Бесполезные методы. УДАЛИТЬ!
-  @Get(':id/group')
-  getByGroup(@Param('id') id: number) {
-    return this.visitorService.getByGroup(id);
-  }
 
   @Post()
   create(@Body() visitor: VisitorDto) {

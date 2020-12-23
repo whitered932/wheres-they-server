@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { VisitorTypeEntity } from '../../entities/visitor-type.entity';
 import { Repository } from 'typeorm';
+import { VisitorService } from '../visitor/visitor.service';
 
 @Injectable()
 export class VisitorTypeService {
@@ -25,6 +26,22 @@ export class VisitorTypeService {
 
   async update(id: number, data) {
     await this.visitorTypeRepository.update({ id }, data);
+    return { updated: true };
+  }
+
+  async addOrRemoveVisitor(id: number, visitorId, remove = false) {
+    remove
+      ? await this.visitorTypeRepository
+          .createQueryBuilder()
+          .relation(VisitorTypeEntity, 'visitors')
+          .of(visitorId)
+          .remove(id)
+      : await this.visitorTypeRepository
+          .createQueryBuilder()
+          .relation(VisitorTypeEntity, 'visitors')
+          .of(visitorId)
+          .add(id);
+
     return { updated: true };
   }
 
