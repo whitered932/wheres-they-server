@@ -14,7 +14,7 @@ export class GroupEntity {
   id: number;
 
   @Column()
-  title: string;
+  name: string;
 
   @Column()
   description: string;

@@ -23,21 +23,13 @@ export class GroupService {
     return await this.groupEntityRepository.save(group);
   }
 
-  async update(title, data) {
-    await this.groupEntityRepository.update({ title }, data);
+  async update(id, data) {
+    await this.groupEntityRepository.update({ id }, data);
     return { updated: true };
   }
 
-  async delete(title) {
-    await this.groupEntityRepository.delete({ title: title });
+  async delete(id) {
+    await this.groupEntityRepository.delete({ id });
     return { deleted: true };
   }
-
-  // После создания Client части, стоит подумать над реализацией
-
-  // async addVisitor(title, visitorId) {
-  //   const group = await this.groupEntityRepository.findOne({ title: title });
-  //   group.visitors = [...group.visitors, visitorId];
-  //   return this.groupEntityRepository.save(group);
-  // }
 }
