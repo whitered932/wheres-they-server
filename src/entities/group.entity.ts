@@ -13,10 +13,10 @@ export class GroupEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 100 })
+  @Column()
   title: string;
 
-  @Column({ length: 400, nullable: true })
+  @Column()
   description: string;
 
   @OneToMany(() => VisitorEntity, (visitor) => visitor.group)

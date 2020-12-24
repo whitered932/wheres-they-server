@@ -19,7 +19,9 @@ export class VisitorService {
   }
 
   async getById(id: number) {
-    return await this.visitorRepository.findOne(id);
+    return await this.visitorRepository.findOne(id, {
+      relations: ['group', 'types'],
+    });
   }
 
   async create(data) {
@@ -28,6 +30,11 @@ export class VisitorService {
   }
 
   async update(id: number, data) {
+    await this.visitorRepository.update({ id }, data);
+    return { updated: true };
+  }
+
+  async patch(id: number, data) {
     await this.visitorRepository.update({ id }, data);
     return { updated: true };
   }

@@ -9,7 +9,9 @@ import {
 } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { GroupDto } from './group.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Группы')
 @Controller('groups')
 export class GroupController {
   constructor(private groupService: GroupService) {}

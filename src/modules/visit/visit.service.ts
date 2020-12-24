@@ -19,9 +19,11 @@ export class VisitService {
     return visitorId
       ? await this.visitRepository.find({
           where: { date: Between(startDate, endDate), visitor: visitorId },
+          relations: ['visitor'],
         })
       : await this.visitRepository.find({
           where: { date: Between(startDate, endDate) },
+          relations: ['visitor'],
         });
   }
 

@@ -10,7 +10,9 @@ import {
 } from '@nestjs/common';
 import { VisitorTypeService } from './visitor-type.service';
 import { UpdateVisitorTypeDto, VisitorTypeDto } from './visitor-type.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Типы посетителей')
 @Controller('types')
 export class VisitorTypeController {
   constructor(private visitorTypeService: VisitorTypeService) {}

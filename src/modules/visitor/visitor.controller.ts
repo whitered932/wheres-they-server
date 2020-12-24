@@ -7,10 +7,13 @@ import {
   Put,
   Delete,
   Patch,
+  Query,
 } from '@nestjs/common';
 import { VisitorService } from './visitor.service';
-import { VisitorDto } from './visitor.dto';
+import { visitorDto, updateVisitorDto, patchVisitorDto } from './visitor.dto';
+import { ApiBody, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Посетители')
 @Controller('visitors')
 export class VisitorController {
   constructor(private visitorService: VisitorService) {}
@@ -25,21 +28,25 @@ export class VisitorController {
     return this.visitorService.getById(id);
   }
 
-
   @Post()
-  create(@Body() visitor: VisitorDto) {
+  @ApiBody({ type: [visitorDto] })
+  create(@Body() visitor: visitorDto) {
     return this.visitorService.create(visitor);
   }
 
   // TODO: В случае отстуствия изменений = код 204
+  // TODO: Реализовать Put метод, который обновляет ВСЮ сущность
   @Put(':id')
-  update(@Param('id') id: number, @Body() visitor: VisitorDto) {
+  @ApiBody({ type: updateVisitorDto })
+  fullUpdate(@Param('id') id: number, @Body() visitor: updateVisitorDto) {
     return this.visitorService.update(id, visitor);
   }
 
-  @Delete(':id')
-  delete(@Param('id') id: number) {
-    return this.visitorService.delete(id);
+  @Patch(':id')
+  @ApiParam({ name: 'id' })
+  @ApiQuery({ type: patchVisitorDto })
+  update(@Param('id') id: number, @Query() query: patchVisitorDto) {
+    return this.visitorService.patch(id, query);
   }
 
   @Patch(':id/restore')
@@ -47,4 +54,8 @@ export class VisitorController {
     return this.visitorService.restore(id);
   }
 
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.visitorService.delete(id);
+  }
 }
