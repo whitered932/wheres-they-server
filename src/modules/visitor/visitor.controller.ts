@@ -19,13 +19,13 @@ export class VisitorController {
   constructor(private visitorService: VisitorService) {}
 
   @Get()
-  getAll() {
-    return this.visitorService.getAll();
+  getAll(@Query('relations') relations) {
+    return this.visitorService.getAll(relations);
   }
 
   @Get(':id')
-  getById(@Param('id') id: number) {
-    return this.visitorService.getById(id);
+  getById(@Param('id') id: number, @Query('relations') relations) {
+    return this.visitorService.getById(id, relations);
   }
 
   @Post()
@@ -34,19 +34,11 @@ export class VisitorController {
     return this.visitorService.create(visitor);
   }
 
-  // TODO: В случае отстуствия изменений = код 204
-  // TODO: Реализовать Put метод, который обновляет ВСЮ сущность
-  @Put(':id')
-  @ApiBody({ type: updateVisitorDto })
-  fullUpdate(@Param('id') id: number, @Body() visitor: updateVisitorDto) {
-    return this.visitorService.update(id, visitor);
-  }
-
   @Patch(':id')
   @ApiParam({ name: 'id' })
-  @ApiQuery({ type: patchVisitorDto })
-  update(@Param('id') id: number, @Query() query: patchVisitorDto) {
-    return this.visitorService.patch(id, query);
+  @ApiBody({ type: patchVisitorDto })
+  patch(@Param('id') id: number, @Body() visitorDto: patchVisitorDto) {
+    return this.visitorService.patch(id, visitorDto);
   }
 
   @Patch(':id/restore')

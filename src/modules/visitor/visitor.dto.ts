@@ -11,11 +11,9 @@ export class visitorDto {
 
 export class updateVisitorDto {
   @ApiProperty({ description: 'Имя посетителя', default: 'Павел Дуров' })
-  name: string;
+  name!: string;
   @ApiProperty({ description: 'Дата рождения', default: '1984-8-10' })
-  birthday: Date;
-  @ApiPropertyOptional({ description: 'Группа посетителя' })
-  group?: string;
+  birthday!: Date;
 }
 
 export class patchVisitorDto {

@@ -14,24 +14,19 @@ export class VisitorService {
     private visitorTypeService: VisitorTypeService,
   ) {}
 
-  async getAll() {
-    return await this.visitorRepository.find({});
+  async getAll(relations = []) {
+    return await this.visitorRepository.find({ relations });
   }
 
-  async getById(id: number) {
+  async getById(id: number, relations = []) {
     return await this.visitorRepository.findOne(id, {
-      relations: ['group', 'types'],
+      relations,
     });
   }
 
   async create(data) {
     const visitor = this.visitorRepository.create(data);
     return await this.visitorRepository.save(visitor);
-  }
-
-  async update(id: number, data) {
-    await this.visitorRepository.update({ id }, data);
-    return { updated: true };
   }
 
   async patch(id: number, data) {
