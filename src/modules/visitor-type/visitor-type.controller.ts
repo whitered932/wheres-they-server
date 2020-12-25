@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { VisitorTypeService } from './visitor-type.service';
 import { UpdateVisitorTypeDto, VisitorTypeDto } from './visitor-type.dto';
@@ -18,13 +19,13 @@ export class VisitorTypeController {
   constructor(private visitorTypeService: VisitorTypeService) {}
 
   @Get()
-  getAll() {
-    return this.visitorTypeService.getAll();
+  getAll(@Query('relations') relations) {
+    return this.visitorTypeService.getAll(relations);
   }
 
   @Get(':id')
-  getById(@Param('id') id: number) {
-    return this.visitorTypeService.getById(id);
+  getById(@Param('id') id: number, @Query('relations') relations) {
+    return this.visitorTypeService.getById(id, relations);
   }
 
   @Post()

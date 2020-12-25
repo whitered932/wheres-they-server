@@ -11,12 +11,12 @@ export class VisitorTypeService {
     private visitorTypeRepository: Repository<VisitorTypeEntity>,
   ) {}
 
-  async getAll() {
-    return await this.visitorTypeRepository.find({});
+  async getAll(relations = []) {
+    return await this.visitorTypeRepository.find({ relations });
   }
 
-  async getById(id: number, options = null) {
-    return await this.visitorTypeRepository.findOne({ id }, options);
+  async getById(id: number, relations = []) {
+    return await this.visitorTypeRepository.findOne({ id }, { relations });
   }
 
   async create(data) {
