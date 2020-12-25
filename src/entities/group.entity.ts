@@ -16,7 +16,7 @@ export class GroupEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @OneToMany(() => VisitorEntity, (visitor) => visitor.group)
