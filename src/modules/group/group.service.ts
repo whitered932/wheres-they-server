@@ -10,12 +10,12 @@ export class GroupService {
     private groupEntityRepository: Repository<GroupEntity>,
   ) {}
 
-  async getAll() {
-    return this.groupEntityRepository.find({});
+  async getAll(relations = []) {
+    return this.groupEntityRepository.find({ relations });
   }
 
-  async getById(id: number, options = null) {
-    return await this.groupEntityRepository.findOne({ id }, options);
+  async getById(id: number, relations = []) {
+    return await this.groupEntityRepository.findOne({ id }, { relations });
   }
 
   async create(data) {

@@ -6,6 +6,7 @@ import {
   Get,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { GroupDto } from './group.dto';
@@ -17,13 +18,13 @@ export class GroupController {
   constructor(private groupService: GroupService) {}
 
   @Get()
-  getAll() {
-    return this.groupService.getAll();
+  getAll(@Query('relations') relations) {
+    return this.groupService.getAll(relations);
   }
 
   @Get(':id')
-  getById(@Param('id') id: number) {
-    return this.groupService.getById(id);
+  getById(@Param('id') id: number, @Query('relations') relations) {
+    return this.groupService.getById(id, relations);
   }
 
   @Post()
