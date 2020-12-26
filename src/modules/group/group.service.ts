@@ -23,7 +23,7 @@ export class GroupService {
     return await this.groupEntityRepository.save(group);
   }
 
-  async update(id, data) {
+  async patch(id, data) {
     await this.groupEntityRepository.update({ id }, data);
     return { updated: true };
   }

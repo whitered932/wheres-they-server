@@ -2,15 +2,15 @@ import {
   Controller,
   Body,
   Param,
+  Query,
   Delete,
   Get,
   Post,
-  Put,
-  Query,
+  Patch,
 } from '@nestjs/common';
 import { GroupService } from './group.service';
-import { GroupDto } from './group.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { CreateGroupDto, PatchGroupDto } from './group.dto';
+import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Группы')
 @Controller('groups')
@@ -23,21 +23,26 @@ export class GroupController {
   }
 
   @Get(':id')
+  @ApiParam({ name: 'id', description: 'ID группы' })
   getById(@Param('id') id: number, @Query('relations') relations) {
     return this.groupService.getById(id, relations);
   }
 
   @Post()
-  create(@Body() group: GroupDto) {
+  @ApiBody({ type: [CreateGroupDto] })
+  create(@Body() group: CreateGroupDto) {
     return this.groupService.create(group);
   }
 
-  @Put(':id')
-  update(@Param('id') id, @Body() data: GroupDto) {
-    return this.groupService.update(id, data);
+  @Patch(':id')
+  @ApiParam({ name: 'id', description: 'ID группы' })
+  @ApiBody({ type: PatchGroupDto })
+  patch(@Param('id') id, @Body() data: PatchGroupDto) {
+    return this.groupService.patch(id, data);
   }
 
   @Delete(':id')
+  @ApiParam({ name: 'id', description: 'ID группы' })
   delete(@Param('id') id) {
     return this.groupService.delete(id);
   }
