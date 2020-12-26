@@ -1,11 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class visitorTypeDto {
-  @ApiPropertyOptional({ description: 'Название типа', default: 'Вконтакте' })
+  @ApiPropertyOptional({ description: 'Название типа', default: 'Программист' })
   title: string;
   @ApiPropertyOptional({
     description: 'Описание типа',
-    default: 'Комадна разработчиков Вконтакте',
+    default: 'Раб галерный',
   })
   description: string;
 }
