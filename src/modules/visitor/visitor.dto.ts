@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-export class visitorDto {
+export class VisitorDto {
   @ApiProperty({ description: 'Имя посетителя', default: 'Павел Дуров' })
   name: string;
   @ApiProperty({ description: 'Дата рождения', default: '1984-8-10' })
@@ -16,7 +16,7 @@ export class updateVisitorDto {
   birthday!: Date;
 }
 
-export class patchVisitorDto {
+export class PatchVisitorDto {
   @ApiPropertyOptional({ description: 'Имя посетителя', default: 'Павел Дуров' })
   name?: string;
   @ApiPropertyOptional({ description: 'Дата рождения', default: '1984-8-10' })

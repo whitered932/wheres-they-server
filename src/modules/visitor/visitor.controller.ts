@@ -10,7 +10,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { VisitorService } from './visitor.service';
-import { visitorDto, updateVisitorDto, patchVisitorDto } from './visitor.dto';
+import { VisitorDto, updateVisitorDto, PatchVisitorDto } from './visitor.dto';
 import { ApiBody, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Посетители')
@@ -29,16 +29,16 @@ export class VisitorController {
   }
 
   @Post()
-  @ApiBody({ type: [visitorDto] })
-  create(@Body() visitor: visitorDto) {
+  @ApiBody({ type: [VisitorDto] })
+  create(@Body() visitor: VisitorDto) {
     return this.visitorService.create(visitor);
   }
 
   @Patch(':id')
   @ApiParam({ name: 'id' })
-  @ApiBody({ type: patchVisitorDto })
+  @ApiBody({ type: PatchVisitorDto })
   @HttpCode(200)
-  async patch(@Param('id') id: number, @Body() visitorDto: patchVisitorDto) {
+  async patch(@Param('id') id: number, @Body() visitorDto: PatchVisitorDto) {
     return this.visitorService.patch(id, visitorDto);
   }
 
