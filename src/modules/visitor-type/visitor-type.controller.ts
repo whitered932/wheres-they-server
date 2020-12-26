@@ -7,10 +7,11 @@ import {
   Post,
   Patch,
   Delete,
+  HttpCode,
 } from '@nestjs/common';
 import { VisitorTypeService } from './visitor-type.service';
-import { UpdateVisitorTypeDto, VisitorTypeDto } from './visitor-type.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { addVisitorTypeDto, visitorTypeDto } from './visitor-type.dto';
+import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Типы посетителей')
 @Controller('types')
@@ -28,12 +29,17 @@ export class VisitorTypeController {
   }
 
   @Post()
-  create(@Body() type: VisitorTypeDto) {
+  @ApiBody({ type: [visitorTypeDto] })
+  @HttpCode(201)
+  create(@Body() type: visitorTypeDto) {
     return this.visitorTypeService.create(type);
   }
 
   @Patch(':id/visitors')
-  addOrRemoveVisitor(@Param('id') id, @Body() data: UpdateVisitorTypeDto) {
+  @ApiParam({ name: 'id', description: 'ID типа' })
+  @ApiBody({ type: addVisitorTypeDto })
+  @HttpCode(200)
+  addOrRemoveVisitor(@Param('id') id, @Body() data: addVisitorTypeDto) {
     return this.visitorTypeService.addOrRemoveVisitor(
       id,
       data.visitor,
@@ -42,11 +48,14 @@ export class VisitorTypeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id, @Body() type: VisitorTypeDto) {
+  @ApiParam({ name: 'id' })
+  @ApiBody({ type: visitorTypeDto })
+  patch(@Param('id') id, @Body() type: visitorTypeDto) {
     return this.visitorTypeService.patch(id, type);
   }
 
   @Delete(':id')
+  @ApiParam({ name: 'id' })
   delete(@Param('id') id: number) {
     return this.visitorTypeService.delete(id);
   }
