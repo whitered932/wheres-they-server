@@ -2,16 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { VisitorEntity } from '../../entities/visitor.entity';
-import { GroupService } from '../group/group.service';
-import { VisitorTypeService } from '../visitor-type/visitor-type.service';
 
 @Injectable()
 export class VisitorService {
   constructor(
     @InjectRepository(VisitorEntity)
     private visitorRepository: Repository<VisitorEntity>,
-    private groupService: GroupService,
-    private visitorTypeService: VisitorTypeService,
   ) {}
 
   async getAll(relations = []) {
@@ -42,25 +38,5 @@ export class VisitorService {
   async restore(id: number) {
     await this.visitorRepository.restore(id);
     return { restored: true };
-  }
-
-  async addType(id: number, typeId: number) {
-    const type = await this.visitorTypeService.getById(typeId);
-    const visitor = await this.visitorRepository.findOne(
-      { id },
-      { relations: ['types'] },
-    );
-    visitor.types.push(type);
-    return await this.visitorRepository.save(visitor);
-  }
-
-  async removeType(id: number, typeId: number) {
-    const visitor = await this.visitorRepository.findOne({ id });
-
-    visitor.types = visitor.types.filter((type) => {
-      type.id !== typeId;
-    });
-
-    return this.visitorRepository.save(visitor);
   }
 }

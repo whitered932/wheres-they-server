@@ -2,12 +2,12 @@ import {
   Controller,
   Body,
   Param,
+  Query,
+  HttpCode,
   Get,
   Post,
-  Put,
-  Delete,
   Patch,
-  Query,
+  Delete,
 } from '@nestjs/common';
 import { VisitorService } from './visitor.service';
 import { visitorDto, updateVisitorDto, patchVisitorDto } from './visitor.dto';
@@ -37,7 +37,8 @@ export class VisitorController {
   @Patch(':id')
   @ApiParam({ name: 'id' })
   @ApiBody({ type: patchVisitorDto })
-  patch(@Param('id') id: number, @Body() visitorDto: patchVisitorDto) {
+  @HttpCode(200)
+  async patch(@Param('id') id: number, @Body() visitorDto: patchVisitorDto) {
     return this.visitorService.patch(id, visitorDto);
   }
 
