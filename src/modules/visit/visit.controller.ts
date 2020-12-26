@@ -2,20 +2,18 @@ import {
   Controller,
   Body,
   Param,
-  Delete,
-  Post,
   Query,
   Get,
+  Post,
+  Delete,
 } from '@nestjs/common';
 import { VisitService } from './visit.service';
-import { createVisitDto, findVisitDto } from './visit.dto';
+import { CreateVisitDto, FindVisitDto } from './visit.dto';
 import {
   ApiBody,
-  ApiCreatedResponse,
-  ApiParam,
   ApiQuery,
-  ApiResponse,
   ApiTags,
+  ApiCreatedResponse,
 } from '@nestjs/swagger';
 
 @ApiTags('Посещения')
@@ -24,8 +22,8 @@ export class VisitController {
   constructor(private visitService: VisitService) {}
 
   @Get()
-  @ApiQuery({ type: [findVisitDto] })
-  find(@Query() query: findVisitDto) {
+  @ApiQuery({ type: [FindVisitDto] })
+  find(@Query() query: FindVisitDto) {
     return this.visitService.find(query.start, query.end, query.visitorId);
   }
 
@@ -33,8 +31,8 @@ export class VisitController {
   @ApiCreatedResponse({
     description: 'Посещение было создано успешно',
   })
-  @ApiBody({ type: [createVisitDto] })
-  create(@Body() visit: createVisitDto) {
+  @ApiBody({ type: [CreateVisitDto] })
+  create(@Body() visit: CreateVisitDto) {
     if (!visit.date) {
       visit.date = new Date().toISOString();
       return this.visitService.create(visit);

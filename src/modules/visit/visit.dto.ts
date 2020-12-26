@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-export class findVisitDto {
+export class FindVisitDto {
   @ApiPropertyOptional({ description: 'Начальная дата поиска' })
   start: Date;
   @ApiPropertyOptional({ description: 'Конечная дата поиска' })
@@ -11,10 +11,9 @@ export class findVisitDto {
   visitorId: number;
 }
 
-export class createVisitDto {
+export class CreateVisitDto {
   @ApiPropertyOptional({ description: 'Дата посещения' })
   date: string;
   @ApiProperty({ description: 'ID посетителя' })
   visitorId: number;
 }
-
