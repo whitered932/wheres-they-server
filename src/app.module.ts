@@ -8,7 +8,13 @@ import { GroupModule } from './modules/group/group.module';
 import { VisitorTypeModule } from './modules/visitor-type/visitor-type.module';
 
 @Module({
-  imports: [VisitorModule, TypeOrmModule.forRoot(), VisitModule, GroupModule, VisitorTypeModule],
+  imports: [
+    TypeOrmModule.forRoot(),
+    VisitorModule,
+    VisitModule,
+    GroupModule,
+    VisitorTypeModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
